@@ -145,7 +145,8 @@ public class SaleTransactionScripts {
 	 * @throws PersistenceException When there is an error inserting the sale product into the database
 	 */
 	private void addProductToSale(ProductRowDataGateway product, SaleRowDataGateway sale, double qty) throws PersistenceException {
-		// adds product to sale 
+		// adds product to sale
+		// sauuuuul
 		SaleProductRowDataGateway saleProduct = new SaleProductRowDataGateway(sale.getId(), 
 						product.getProductId(), qty);
 		saleProduct.insert();
