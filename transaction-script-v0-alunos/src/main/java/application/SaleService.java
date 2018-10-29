@@ -37,6 +37,7 @@ public enum SaleService {
 	 * @throws ApplicationException In case the sale could not be created.
 	 */
 	public int newSale(int vat) throws ApplicationException {
+		/// só existe este comentário
 		return saleTS.newSale(vat);
 	}
 
