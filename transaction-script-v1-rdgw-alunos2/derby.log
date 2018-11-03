@@ -1,0 +1,13 @@
+----------------------------------------------------------------
+Sat Nov 03 14:51:50 WET 2018:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.12.1.1 - (1704137): instance a816c00e-0166-da0f-0852-0000067b5060 
+on database directory /home/bernardomelo/Desktop/CSS/transaction-script-v1-rdgw-alunos/data/derby/cssdb with class loader sun.misc.Launcher$AppClassLoader@18b4aac2 
+Loaded from file:/home/bernardomelo/.m2/repository/org/apache/derby/derby/10.12.1.1/derby-10.12.1.1.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_181-8u181-b13-0ubuntu0.18.04.1-b13
+user.dir=/home/bernardomelo/Desktop/CSS/transaction-script-v1-rdgw-alunos
+os.name=Linux
+os.arch=amd64
+os.version=4.15.0-36-generic
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''
