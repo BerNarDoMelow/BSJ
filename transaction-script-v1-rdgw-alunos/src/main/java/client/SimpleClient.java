@@ -7,7 +7,6 @@ import presentation.SaleService;
 import SaleSys.SaleSys;
 import business.ApplicationException;
 import business.DiscountType;
-import presentation.VendedorService;
 
 /**
  * A simple application client that uses both services.
@@ -40,8 +39,7 @@ public class SimpleClient {
 			
 		// Access both available services
 		CustomerService cs = app.getCustomerService();
-		SaleService ss = app.getSaleService();
-		VendedorService vs = app.
+		SaleService ss = app.getSaleService();		
 		
 		// the interaction
 		try {

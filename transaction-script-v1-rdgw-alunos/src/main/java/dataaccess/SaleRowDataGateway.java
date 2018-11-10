@@ -1,11 +1,9 @@
 package dataaccess;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.Date;
 
 import business.SaleStatus;
-import java.sql.SQLException;
+
 /**
  * An in-memory representation of a customer table record. 
  *	
@@ -32,29 +30,20 @@ import java.sql.SQLException;
  */
 public class SaleRowDataGateway {
 
-	private static int id;
-	private static java.sql.Date date;
-	private static String status;
-	private static double total;
-	private static double discount;
-	private static int customerId;
-	private static int vendedorId;
-	private static double comissao;
+	// Sale attributes 
 
 
-	private static final String OPEN = "O";
-	private static final String CLOSED = "C";
 	/**
 	 * The select a sale by Id SQL statement
 	 */
 	private static final String GET_SALE_SQL = 
-			"select * from sale s where s.id = ?"; // TODO: program me!
+			""; // TODO: program me!
 
 	/**
 	 * The insert sale SQL statement
 	 */
 	private static final String INSERT_SALE_SQL = 
-			"insert into sale(date,status,total,discount_total,customer_id,vendedor_id,comissao) values (?,?,?,?,?,?,?)"; // TODO: program me!
+			""; // TODO: program me!
 
 	// Constants for conversion of status
 
@@ -66,60 +55,39 @@ public class SaleRowDataGateway {
 	 * @param customerId The customer Id the sale belongs to
 	 * @param date The date the sale took place
 	 */
-	public SaleRowDataGateway(int customerId, Date date, double comissao) {
-		this.customerId = customerId;
-		this.date = new java.sql.Date(date.getTime());
-		status = OPEN;
-		total = 0.0;
-		discount = 0.0;
-		vendedorId = 0;
-		this.comissao = comissao;
+	public SaleRowDataGateway(int customerId, Date date) {
+		// TODO Auto-generated method stub
 	}
 
 	// 2. getters and setters
 
 	public int getId() {
-		return id;
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	public SaleStatus getStatus() {
-		return  (status == "O")?SaleStatus.OPEN:SaleStatus.CLOSED;
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	public int getCustomerId() {
-		return customerId;
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	public double getDiscount() {
-		return discount;
+		// TODO Auto-generated method stub
+		return 0;
 	}
-
-	public double getComissao(){ return comissao; }
-
-	public int getVendedorId(){ return vendedorId; }
 
 	// 3. interaction with the repository (a memory map in this simple example)
 
 	/**
 	 * Stores the information in the repository
 	 */
-	public void insert () throws PersistenceException{
-		try(PreparedStatement statement = DataSource.INSTANCE.prepareGetGenKey(INSERT_SALE_SQL)){
-			statement.setDate(1,date);
-			statement.setString(2,status);
-			statement.setDouble(3,total);
-			statement.setDouble(4,discount);
-			statement.setInt(5,customerId);
-			statement.setInt(6,vendedorId);
-			statement.setDouble(7,comissao);
-			statement.executeUpdate();
-			try(ResultSet resultSet = statement.getGeneratedKeys()){
-				resultSet.next();
-				id = resultSet.getInt(1);
-			}
-		}catch (SQLException e) {
-			throw new PersistenceException ("Internal error!", e);
-		}
+	public void insert () throws PersistenceException {		
+		// TODO: program me!
 	}
 
 	/**
@@ -130,51 +98,8 @@ public class SaleRowDataGateway {
 	 * @throws PersistenceException In case there is an error accessing the database.
 	 */
 	public static SaleRowDataGateway find (int id) throws PersistenceException {
-		try(PreparedStatement statement = DataSource.INSTANCE.prepare(INSERT_SALE_SQL)){
-			statement.setInt(1,id);
-			try(ResultSet resultSet = statement.executeQuery()){
-				SaleRowDataGateway saleRDG = load(resultSet);
-				return saleRDG;
-			}
-		}catch (SQLException e){
-			throw new PersistenceException("errro: "+ e.getErrorCode());
-		}
+		return null;
+		// TODO: program me!	
 	}
 
-
-	public static SaleRowDataGateway load(ResultSet rs) throws RecordNotFoundException{
-		try {
-			rs.next();
-			SaleRowDataGateway saleRDG = new SaleRowDataGateway(rs.getInt("custumer_id"),rs.getDate("date"));
-			saleRDG.total = rs.getDouble("total");
-			saleRDG.discount = rs.getDouble("discount_total");
-			return saleRDG;
-		} catch (SQLException e) {
-			throw new RecordNotFoundException ("Customer does not exist", e);
-		}
-	}
-
-	private static final String SQLCommandUpdate = 'update sale s set s.vendedor_id = ? where s.id = ?';
-
-	public static void updateVendedor(int saleId,int vendedorId) throws PersistenceException{
-		try(PreparedStatement statement = DataSource.INSTANCE.prepareGetGenKey(SQLCommandUpdate)){
-			statement.setInt(1,vendedorId);
-			statement.setInt(2,saleId);
-			statement.executeUpdate();
-		}catch (SQLException e) {
-			throw new PersistenceException("Internal error!", e);
-		}
-	}
-
-	private static final String SQLCommandUpdate = 'update sale s set s.comissao = ? where s.id = ?';
-
-	public static void updateComissao(int saleId,double comissao) throws PersistenceException{
-		try(PreparedStatement statement = DataSource.INSTANCE.prepareGetGenKey(SQLCommandUpdate)){
-			statement.setDouble(1,comissao);
-			statement.setInt(2,saleId);
-			statement.executeUpdate();
-		}catch (SQLException e) {
-			throw new PersistenceException("Internal error!", e);
-		}
-	}
 }

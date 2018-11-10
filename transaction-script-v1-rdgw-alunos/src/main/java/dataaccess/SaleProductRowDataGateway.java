@@ -12,39 +12,33 @@ import java.util.Set;
 public class SaleProductRowDataGateway {
 	
 	// 1. Sale product attributes 
-	private static int id;
-	private static double qty;
-	private static int productId;
-	private static int saleId;
-
-
+	
+	
 	/**
 	 * The insert product in a sale SQL statement
 	 */
 	private static final String INSERT_PRODUCT_SALE_SQL = 
-			"insert into saleproduct (qty,product_id,sale_id) values (?,?,?)"; // TODO: program me!
+			""; // TODO: program me!
 
 	
 	/**
 	 * The select the products of a sale by sale Id SQL statement
 	 */
 	private static final String GET_SALE_PRODUCTS_SQL = 
-			"select * from saleproduct sp where sp.id = ?"; // TODO: program me!
+			""; // TODO: program me!		
 
 	// 2. constructor
-	public SaleProductRowDataGateway(double qty,int product_id,int sale_id){
-		this.qty = qty;
-		this.productId = product_id;
-		this.saleId = sale_id;
-	}
+
 
 	// 3. getters and setters
 	public int getProductId() {
-		return productId;
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	public double getQty() {
-		return qty;
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	// 4. interaction with the repository (a relational database in this simple example)

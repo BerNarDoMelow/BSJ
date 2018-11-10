@@ -2,7 +2,6 @@ package SaleSys;
 
 import presentation.CustomerService;
 import presentation.SaleService;
-import presentation.VendedorService;
 import business.ApplicationException;
 import business.CustomerTransactionScripts;
 import business.SaleTransactionScripts;
@@ -13,7 +12,6 @@ public class SaleSys {
 
 	private CustomerService customerService;
 	private SaleService saleService;
-	private VendedorService vendedorService;
 
 	public void run() throws ApplicationException {
 		// Connects to the database
@@ -21,7 +19,6 @@ public class SaleSys {
 			DataSource.INSTANCE.connect("jdbc:derby:data/derby/cssdb;create=false", "SaleSys", "");
 			customerService = new CustomerService(new CustomerTransactionScripts());
 			saleService = new SaleService(new SaleTransactionScripts());
-			vendedorService = new VendedorService();
 		} catch (PersistenceException e) {
 			throw new ApplicationException("Error connecting database", e);
 		}
@@ -39,5 +36,4 @@ public class SaleSys {
 	public SaleService getSaleService() {
 		return saleService;
 	}
-
 }
