@@ -68,11 +68,38 @@ public class VendedorRowDataGateway {
         }
     }
 
-    private static final String SQLGetVendedor = "select * from vendedor v where v.id = ?";
+    //AQUIIIII
+    //falta por no vendedorTransactionScript
+    private static final String SQLCommandUpdateComissao_nulo = "update vendedor v set v.comissao = ?";
+    public static void updateComissao_nulo() throws PersistenceException {
+        try(PreparedStatement statement = DataSource.INSTANCE.prepareGetGenKey(SQLCommandUpdateComissao)){
+            statement.setDouble(1,0);
+            statement.executeUpdate();
+        }catch (SQLException e) {
+            throw new PersistenceException("Internal error!", e);
+        }
+    }
+
+
+        private static final String SQLGetVendedor = "select * from vendedor v where v.id = ?";
 
     public static VendedorRowDataGateway getVendedorById(int vendedorId) throws PersistenceException{
-        try(PreparedStatement sta = DataSource.INSTANCE.prepare(SQLGetVendedor)){
+        /*try(PreparedStatement sta = DataSource.INSTANCE.prepare(SQLGetVendedor)){
             sta.setInt(1,vendedorId);
+            try(ResultSet resultSet = sta.executeQuery()){
+                return find(resultSet);
+            }
+        }catch (SQLException e){
+            throw new PersistenceException("Nao existe tal coisa");
+        }*/
+        //AQUIIIIII
+        return usaIsto(vendedorId,SQLGetVendedor);
+    }
+
+    //AQUIIIIIII
+    public static VendedorRowDataGateway usaIsto(int id, String str) throws PersistenceException{
+        try(PreparedStatement sta = DataSource.INSTANCE.prepare(str)){
+            sta.setInt(1,id);
             try(ResultSet resultSet = sta.executeQuery()){
                 return find(resultSet);
             }
@@ -97,13 +124,16 @@ public class VendedorRowDataGateway {
     private static final String SQLGetVendedorByFuncNumber = "select * from vendedor v where v.numero = ?";
 
     public static VendedorRowDataGateway findByFuncionarioNumb(int funcNumber) throws PersistenceException{
-        try(PreparedStatement sta = DataSource.INSTANCE.prepare(SQLGetVendedorByFuncNumber)){
+        /*try(PreparedStatement sta = DataSource.INSTANCE.prepare(SQLGetVendedorByFuncNumber)){
             sta.setInt(1,funcNumber);
             try(ResultSet resultSet = sta.executeQuery()){
                 return find(resultSet);
             }
         }catch (SQLException e){
             throw new PersistenceException("Nao existe tal coisa");
-        }
+        }*/
+        //AQUIIIIIIII
+        return usaIsto(funcNumber,SQLGetVendedorByFuncNumber);
+
     }
 }

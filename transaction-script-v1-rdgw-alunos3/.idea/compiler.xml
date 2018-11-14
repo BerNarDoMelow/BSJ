@@ -9,8 +9,5 @@
         <module name="transaction-script-v1-rdgw-alunos" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="transaction-script-v1-rdgw-alunos" target="1.8" />
-    </bytecodeTargetLevel>
   </component>
 </project>

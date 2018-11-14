@@ -140,9 +140,11 @@ public class SaleRowDataGateway {
 				return saleRDG;
 			}
 		}catch (SQLException e){
-			throw new PersistenceException("errro: "+ e.getErrorCode());
+			throw new PersistenceException("erro: "+ e.getErrorCode());
 		}
 	}
+
+
 
 
 	public static SaleRowDataGateway load(ResultSet rs) throws RecordNotFoundException{
@@ -165,6 +167,19 @@ public class SaleRowDataGateway {
 	public static void updateVendedor(int saleId,int vendedorId) throws PersistenceException{
 		try(PreparedStatement statement = DataSource.INSTANCE.prepareGetGenKey(SQLCommandUpdateVendedor)){
 			statement.setInt(1,vendedorId);
+			statement.setInt(2,saleId);
+			statement.executeUpdate();
+		}catch (SQLException e) {
+			throw new PersistenceException("Internal error!", e);
+		}
+	}
+
+	//AQUIII
+	private static final String SQLCommandUpdateSaleTotal = "update sale s set s.total = ? where s.id = ?";
+
+	public static void updateTotal(int saleId,double total) throws PersistenceException{
+		try(PreparedStatement statement = DataSource.INSTANCE.prepareGetGenKey(SQLCommandUpdateVendedor)){
+			statement.setDouble(1,total);
 			statement.setInt(2,saleId);
 			statement.executeUpdate();
 		}catch (SQLException e) {

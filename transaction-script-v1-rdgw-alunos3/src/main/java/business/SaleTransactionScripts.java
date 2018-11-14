@@ -107,7 +107,6 @@ public class SaleTransactionScripts {
 					// JDBC Begin transaction
 					DataSource.INSTANCE.beginTransaction();
 					decreaseStockValue(product, qty);
-					addProductToSale(product, sale, qty);
 					// JDBC commit
 					DataSource.INSTANCE.commit();
 				} catch (PersistenceException e) {
